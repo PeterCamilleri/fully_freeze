@@ -116,6 +116,12 @@ class FullyFreezeTest < Minitest::Test
 
     assert(evil.fully_freeze.frozen?)
     assert(evil.fully_frozen?)
+
+    evil = LoremIpsum.new("rr", Complex(1,2), [1,2,3])
+    evil.c[1] = sample
+
+    assert(evil.fully_freeze.frozen?)
+    assert(evil.fully_frozen?)
   end
 
 end
