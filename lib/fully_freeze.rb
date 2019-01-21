@@ -1,6 +1,6 @@
-require "fully_freeze/version"
+# coding: utf-8
 
-module FullyFreeze
-  class Error < StandardError; end
-  # Your code goes here...
-end
+# A deep, recursive freeze and freeze tester.
+
+
+require_relative 'fully_freeze/version'
