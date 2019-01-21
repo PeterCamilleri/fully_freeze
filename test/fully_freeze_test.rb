@@ -3,6 +3,18 @@ gem              'minitest'
 require          'minitest/autorun'
 require          'minitest_visible'
 
+class LoremIpsum
+
+  attr_accessor :a
+  attr_accessor :b
+  attr_accessor :c
+
+  def initialize(a,b,c)
+    @a, @b, @c = a,b,c
+  end
+
+end
+
 class FullyFreezeTest < Minitest::Test
 
   #Track mini-test progress.
@@ -68,8 +80,8 @@ class FullyFreezeTest < Minitest::Test
     assert((1..42).to_a.fully_freeze.frozen?)
     assert((1..42).to_a.fully_freeze.fully_frozen?)
 
-    assert([1,2,[3,4]].fully_freeze.frozen?)
-    assert([1,2,[3,4]].fully_freeze.fully_frozen?)
+    assert([1,2,[3,Complex(4,5)]].fully_freeze.frozen?)
+    assert([1,2,[3,Complex(4,5)]].fully_freeze.fully_frozen?)
 
     evil = [1,2,nil,3,4]
     evil[2] = evil
@@ -88,6 +100,19 @@ class FullyFreezeTest < Minitest::Test
     evil = {"a" => "b", "c" => "d", "e" => "f", "g" => 99}
     evil["evil"] = evil
     assert_equal(evil.object_id, evil["evil"].object_id)
+
+    assert(evil.fully_freeze.frozen?)
+    assert(evil.fully_frozen?)
+  end
+
+  def test_with_common_objects
+    sample = LoremIpsum.new("rr", Complex(1,2), [1,2,3])
+
+    assert(sample.fully_freeze.frozen?)
+    assert(sample.fully_frozen?)
+
+    evil = LoremIpsum.new("rr", Complex(1,2), [1,2,3])
+    evil.b = sample
 
     assert(evil.fully_freeze.frozen?)
     assert(evil.fully_frozen?)
