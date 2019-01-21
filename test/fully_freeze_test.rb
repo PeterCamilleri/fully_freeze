@@ -15,6 +15,8 @@ class LoremIpsum
 
 end
 
+Sample = Struct.new(:a, :b, :c)
+
 class FullyFreezeTest < Minitest::Test
 
   #Track mini-test progress.
@@ -106,19 +108,38 @@ class FullyFreezeTest < Minitest::Test
   end
 
   def test_with_common_objects
-    sample = LoremIpsum.new("rr", Complex(1,2), [1,2,3])
+    nice = LoremIpsum.new("rr", Complex(1,2), [1,2,3])
 
-    assert(sample.fully_freeze.frozen?)
-    assert(sample.fully_frozen?)
+    assert(nice.fully_freeze.frozen?)
+    assert(nice.fully_frozen?)
 
     evil = LoremIpsum.new("rr", Complex(1,2), [1,2,3])
-    evil.b = sample
+    evil.b = evil
 
     assert(evil.fully_freeze.frozen?)
     assert(evil.fully_frozen?)
 
     evil = LoremIpsum.new("rr", Complex(1,2), [1,2,3])
-    evil.c[1] = sample
+    evil.c[1] = evil
+
+    assert(evil.fully_freeze.frozen?)
+    assert(evil.fully_frozen?)
+  end
+
+  def test_with_structs
+    nice = Sample.new("rr", Complex(1,2), [1,2,3])
+
+    assert(nice.fully_freeze.frozen?)
+    assert(nice.fully_frozen?)
+
+    evil = Sample.new("rr", Complex(1,2), [1,2,3])
+    evil.b = evil
+
+    assert(evil.fully_freeze.frozen?)
+    assert(evil.fully_frozen?)
+
+    evil = Sample.new("rr", Complex(1,2), [1,2,3])
+    evil.c[1] = evil
 
     assert(evil.fully_freeze.frozen?)
     assert(evil.fully_frozen?)
