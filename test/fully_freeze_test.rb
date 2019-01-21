@@ -12,8 +12,14 @@ class FullyFreezeTest < Minitest::Test
     refute_nil ::FullyFreeze::VERSION
     assert(::FullyFreeze::VERSION.frozen?)
     assert(::FullyFreeze::VERSION.is_a?(String))
-    assert(/\A\d+\.\d+\.\d+/ =~ ::FullyFreeze::VERSION)
-    
+    assert(/\A\d+\.\d+\.\d+/ =~ ::FullyFreeze::VERSION)    
   end
 
+  def test_that_it_has_a_description
+    refute_nil(::FullyFreeze::DESCRIPTION)
+    assert(::FullyFreeze::DESCRIPTION.frozen?)
+    assert(::FullyFreeze::DESCRIPTION.is_a?(String))
+  end
+  
+  
 end
