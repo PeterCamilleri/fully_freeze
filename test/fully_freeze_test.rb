@@ -79,5 +79,18 @@ class FullyFreezeTest < Minitest::Test
     assert(evil.fully_frozen?)
   end
 
+  def test_for_hash_now_legal_in_Canada
+    nice = {"a" => "b", "c" => "d", "e" => "f", "g" => 99}
+
+    assert(nice.fully_freeze.frozen?)
+    assert(nice.fully_frozen?)
+
+    evil = {"a" => "b", "c" => "d", "e" => "f", "g" => 99}
+    evil["evil"] = evil
+    assert_equal(evil.object_id, evil["evil"].object_id)
+
+    assert(evil.fully_freeze.frozen?)
+    assert(evil.fully_frozen?)
+  end
 
 end
