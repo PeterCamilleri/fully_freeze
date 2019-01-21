@@ -1,3 +1,6 @@
+# coding: utf-8
+
+# A deep, recursive freeze. Adds the fully_freeze and fully_frozen? methods.
 module FullyFreeze
-  VERSION = "0.1.0"
+  VERSION = "0.1.0".freeze
 end
