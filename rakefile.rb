@@ -8,3 +8,9 @@ Rake::TestTask.new(:test) do |t|
 end
 
 task :default => :test
+
+desc "What version of format_output is this?"
+task :vers do |t|
+  puts
+  puts "fully_freeze version = #{::FullyFreeze::VERSION}"
+end
