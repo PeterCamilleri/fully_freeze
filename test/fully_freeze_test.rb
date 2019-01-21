@@ -50,6 +50,18 @@ class FullyFreezeTest < Minitest::Test
 
     assert((/./.match("k")).fully_freeze.frozen?)
     assert((/./.match("k")).fully_freeze.fully_frozen?)
+
+    assert((Thread.new {}).fully_freeze.frozen?)
+    assert((Thread.new {}).fully_freeze.fully_frozen?)
+
+    assert((Thread.new {}).fully_freeze.frozen?)
+    assert((Thread.new {}).fully_freeze.fully_frozen?)
+
+    assert(Complex(1,1).fully_freeze.frozen?)
+    assert(Complex(1,1).fully_freeze.fully_frozen?)
+
+    assert(Rational(1,1).fully_freeze.frozen?)
+    assert(Rational(1,1).fully_freeze.fully_frozen?)
   end
 
 
