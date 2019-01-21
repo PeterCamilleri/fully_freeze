@@ -64,6 +64,20 @@ class FullyFreezeTest < Minitest::Test
     assert(Rational(1,1).fully_freeze.fully_frozen?)
   end
 
+  def test_for_arrays
+    assert((1..42).to_a.fully_freeze.frozen?)
+    assert((1..42).to_a.fully_freeze.fully_frozen?)
+
+    assert([1,2,[3,4]].fully_freeze.frozen?)
+    assert([1,2,[3,4]].fully_freeze.fully_frozen?)
+
+    evil = [1,2,nil,3,4]
+    evil[2] = evil
+    assert_equal(evil.object_id, evil[2].object_id)
+
+    assert(evil.fully_freeze.frozen?)
+    assert(evil.fully_frozen?)
+  end
 
 
 end
