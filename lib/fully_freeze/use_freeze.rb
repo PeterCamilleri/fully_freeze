@@ -16,6 +16,11 @@ class String
   include FullyFreezeFreeze
 end
 
+# Ranges answer freeze.
+class Range
+  include FullyFreezeFreeze
+end
+
 # Enumerators answer freeze.
 class Enumerator
   include FullyFreezeFreeze

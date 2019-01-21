@@ -22,20 +22,34 @@ class FullyFreezeTest < Minitest::Test
   end
 
   def test_for_simple_cases
-    assert(true, 42.fully_freeze.frozen?)
-    assert(true, 42.fully_freeze.fully_frozen?)
+    assert(42.fully_freeze.frozen?)
+    assert(42.fully_freeze.fully_frozen?)
 
-    assert(true, 42.0.fully_freeze.frozen?)
-    assert(true, 42.0.fully_freeze.fully_frozen?)
+    assert(42.0.fully_freeze.frozen?)
+    assert(42.0.fully_freeze.fully_frozen?)
 
-    assert(true, true.fully_freeze.frozen?)
-    assert(true, true.fully_freeze.fully_frozen?)
+    assert(true.fully_freeze.frozen?)
+    assert(true.fully_freeze.fully_frozen?)
 
-    assert(true, false.fully_freeze.frozen?)
-    assert(true, false.fully_freeze.fully_frozen?)
+    assert(false.fully_freeze.frozen?)
+    assert(false.fully_freeze.fully_frozen?)
 
-    assert(true, :false.fully_freeze.frozen?)
-    assert(true, :false.fully_freeze.fully_frozen?)
+    assert(:false.fully_freeze.frozen?)
+    assert(:false.fully_freeze.fully_frozen?)
+  end
+
+  def test_for_mutable_cases
+    assert("42".fully_freeze.frozen?)
+    assert("42".fully_freeze.fully_frozen?)
+
+    assert((1..42).fully_freeze.frozen?)
+    assert((1..42).fully_freeze.fully_frozen?)
+
+    assert((1..42).each.fully_freeze.frozen?)
+    assert((1..42).each.fully_freeze.fully_frozen?)
+
+    assert((/./.match("k")).fully_freeze.frozen?)
+    assert((/./.match("k")).fully_freeze.fully_frozen?)
   end
 
 
