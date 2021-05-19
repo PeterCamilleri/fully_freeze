@@ -2,7 +2,7 @@
 
 # A deep, recursive freeze. Adds the fully_freeze and fully_frozen? methods.
 module FullyFreeze
-  VERSION = "0.1.2".freeze
+  VERSION = "0.1.3".freeze
 
   DESCRIPTION = "A deep, recursive freeze and freeze tester.".freeze
 end
